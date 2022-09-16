@@ -19,6 +19,10 @@ android {
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
     }
 
+    buildFeatures {
+        compose = true
+    }
+
     buildTypes {
         getByName("debug") {
             isMinifyEnabled = false
@@ -31,7 +35,12 @@ android {
             )
         }
     }
-
+    viewBinding {
+        android.buildFeatures.viewBinding = true
+    }
+    dataBinding {
+        android.buildFeatures.dataBinding = true
+    }
     productFlavors {
         create("production") {
             dimension = AppConfig.dimension
