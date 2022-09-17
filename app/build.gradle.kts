@@ -19,6 +19,9 @@ android {
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.0"
+    }
     buildFeatures {
         compose = true
     }
@@ -41,6 +44,7 @@ android {
     dataBinding {
         android.buildFeatures.dataBinding = true
     }
+    flavorDimensions(AppConfig.dimension)
     productFlavors {
         create("production") {
             dimension = AppConfig.dimension
@@ -134,6 +138,12 @@ dependencies {
     implementation(AppDependencies.daggerAndroidSupport)
     implementation(AppDependencies.espressoIdling)
 
+    implementation(AppDependencies.composeActivities)
+    implementation(AppDependencies.composeMaterialDesign)
+    implementation(AppDependencies.composeAnimations)
+    implementation(AppDependencies.composeTooling)
+    implementation(AppDependencies.composeViewModels)
+
     testImplementation(AppDependencies.kotlinCoRoutinesCoreTest)
     testImplementation(AppDependencies.junit)
     testImplementation(AppDependencies.robolectric)
@@ -164,6 +174,7 @@ dependencies {
     androidTestImplementation(AppDependencies.mockk)
     androidTestImplementation(AppDependencies.mockkAndroid)
     androidTestImplementation(AppDependencies.navigationTesting)
+    androidTestImplementation(AppDependencies.composeUITests)
 
     debugImplementation(AppDependencies.fragmentTesting)
 }

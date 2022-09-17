@@ -24,10 +24,18 @@ object AppDependencies {
     const val lifeCycleRunTime =
         "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.archLifeCycle}"
     const val lifeCycleExtensions =
-        "androidx.lifecycle:lifecycle-extensions:${Versions.archLifeCycle}"
+        "androidx.lifecycle:lifecycle-extensions:${Versions.archLifeCycleExt}"
     const val lifeCycleKTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.archLifeCycle}"
     const val lifeCycleLiveDataKTX =
         "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.archLifeCycle}"
+
+    // Compose Libraries
+    const val composeActivities = "androidx.activity:activity-compose:${Versions.composeActivities}"
+    const val composeMaterialDesign = "androidx.compose.material:material:${Versions.composeMaterialDesign}"
+    const val composeAnimations = "androidx.compose.animation:animation:${Versions.composeAnimations}"
+    const val composeTooling = "androidx.compose.ui:ui-tooling:${Versions.composeTooling}"
+    const val composeViewModels = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeViewModels}"
+    const val composeUITests = "androidx.compose.ui:ui-test-junit4:${Versions.composeUITests}"
 
     // Square Libraries consumed
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"

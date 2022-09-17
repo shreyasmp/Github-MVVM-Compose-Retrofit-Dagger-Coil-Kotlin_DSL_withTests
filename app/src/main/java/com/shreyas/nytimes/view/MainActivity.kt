@@ -1,4 +1,4 @@
-package com.shreyas.nytimes
+package com.shreyas.nytimes.view
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import com.shreyas.nytimes.R
 import com.shreyas.nytimes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
