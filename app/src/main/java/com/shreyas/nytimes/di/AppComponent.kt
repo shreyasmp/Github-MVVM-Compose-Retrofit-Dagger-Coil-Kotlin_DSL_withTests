@@ -2,7 +2,10 @@ package com.shreyas.nytimes.di
 
 import android.app.Application
 import com.shreyas.nytimes.MainApplication
+import com.shreyas.nytimes.di.modules.PicassoModule
 import com.shreyas.nytimes.di.modules.ServiceModule
+import com.shreyas.nytimes.di.modules.ViewModelFactoryModule
+import com.shreyas.nytimes.di.modules.ViewModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -14,7 +17,10 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         AndroidSupportInjectionModule::class,
-        ServiceModule::class
+        ServiceModule::class,
+        ViewModelFactoryModule::class,
+        PicassoModule::class,
+        ViewModule::class
     ]
 )
 interface AppComponent {
