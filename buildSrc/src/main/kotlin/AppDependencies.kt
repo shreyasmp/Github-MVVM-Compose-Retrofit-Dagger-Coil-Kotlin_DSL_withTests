@@ -34,6 +34,7 @@ object AppDependencies {
     const val composeMaterialDesign = "androidx.compose.material:material:${Versions.composeMaterialDesign}"
     const val composeAnimations = "androidx.compose.animation:animation:${Versions.composeAnimations}"
     const val composeTooling = "androidx.compose.ui:ui-tooling:${Versions.composeTooling}"
+    const val composeToolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.composeTooling}"
     const val composeViewModels = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeViewModels}"
     const val composeUITests = "androidx.compose.ui:ui-test-junit4:${Versions.composeUITests}"
 
