@@ -23,9 +23,9 @@ class GithubSearchViewModel @Inject constructor(
     }
 
     @VisibleForTesting
-    internal val _gitHubRepositoryList: MutableLiveData<MutableList<RepositoryData>> =
+    internal val _gitHubRepositoryList: MutableLiveData<MutableList<RepositoryData>?> =
         MutableLiveData()
-    val gitHubRepositoryList: LiveData<MutableList<RepositoryData>> = _gitHubRepositoryList
+    val gitHubRepositoryList: LiveData<MutableList<RepositoryData>?> = _gitHubRepositoryList
 
     val isError: MutableLiveData<Boolean> = MutableLiveData()
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()

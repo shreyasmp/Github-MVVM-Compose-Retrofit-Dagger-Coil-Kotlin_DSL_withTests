@@ -178,4 +178,5 @@ dependencies {
     androidTestImplementation(AppDependencies.composeUITests)
 
     debugImplementation(AppDependencies.fragmentTesting)
+    debugImplementation(AppDependencies.composeTooling)
 }
