@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
+import com.shreyas.nytimes.R
+import com.shreyas.nytimes.ui.MainScreen
 import com.shreyas.nytimes.view.theme.GitHubRepoComposeAppTheme
 import com.shreyas.nytimes.viewmodel.GithubSearchViewModel
 import dagger.android.AndroidInjection
@@ -32,19 +35,20 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             GitHubRepoComposeAppTheme {
-                TopAppBarWithSearch()
-                GitHubRepoRecyclerviewComposable()
+                TopAppBarWithTitle()
+                MainScreen()
             }
         }
     }
 
+    @Preview
     @Composable
-    fun TopAppBarWithSearch() {
+    fun TopAppBarWithTitle() {
         TopAppBar(
-            elevation = 10.dp,
-        ) {
-
-        }
+            title = {
+                Text(text = this.getString(R.string.app_bar_title))
+            }
+        )
     }
 
     @Composable

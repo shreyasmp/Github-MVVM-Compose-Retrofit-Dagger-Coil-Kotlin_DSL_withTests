@@ -144,6 +144,7 @@ dependencies {
     implementation(AppDependencies.composeTooling)
     implementation(AppDependencies.composeToolingPreview)
     implementation(AppDependencies.composeViewModels)
+    implementation(AppDependencies.composeNavigation)
 
     testImplementation(AppDependencies.kotlinCoRoutinesCoreTest)
     testImplementation(AppDependencies.junit)

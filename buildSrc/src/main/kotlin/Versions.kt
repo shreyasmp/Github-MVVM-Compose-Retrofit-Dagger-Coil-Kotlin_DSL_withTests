@@ -18,6 +18,7 @@ object Versions {
     const val composeTooling = "1.2.1"
     const val composeViewModels = "2.5.1"
     const val composeUITests = "1.2.1"
+    const val composeNavigation = "2.5.2"
 
     const val archLifeCycle = "2.4.0"
     const val archLifeCycleExt = "2.2.0"

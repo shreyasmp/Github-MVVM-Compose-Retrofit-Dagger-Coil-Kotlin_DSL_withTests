@@ -37,6 +37,7 @@ object AppDependencies {
     const val composeToolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.composeTooling}"
     const val composeViewModels = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeViewModels}"
     const val composeUITests = "androidx.compose.ui:ui-test-junit4:${Versions.composeUITests}"
+    const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
 
     // Square Libraries consumed
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
