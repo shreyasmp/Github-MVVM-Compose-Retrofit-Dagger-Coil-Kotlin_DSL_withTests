@@ -1,4 +1,4 @@
-package com.shreyas.nytimes.view.theme
+package com.shreyas.nytimes.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
