@@ -48,7 +48,7 @@ fun SearchViewActionBar(
                     viewModel.updateSearchState(SearchState.CLOSED)
                 },
                 onSearchClicked = {
-                    Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+                    viewModel.fetchMostPopularGitHubRepos(it)
                 },
                 onSearchTriggered = {
                     viewModel.updateSearchState(SearchState.OPENED)
