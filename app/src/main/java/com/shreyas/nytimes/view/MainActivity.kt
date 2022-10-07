@@ -3,11 +3,11 @@ package com.shreyas.nytimes.view
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.Scaffold
-import androidx.compose.ui.res.colorResource
+import androidx.compose.material.Surface
 import androidx.lifecycle.ViewModelProvider
-import com.shreyas.nytimes.R
-import com.shreyas.nytimes.ui.TopAppBarWithTitle
+import com.shreyas.nytimes.ui.SearchViewActionBar
+import com.shreyas.nytimes.ui.theme.GitHubActionSearchAppBarTheme
+import com.shreyas.nytimes.ui.theme.Purple700
 import com.shreyas.nytimes.viewmodel.GithubSearchViewModel
 import dagger.android.AndroidInjection
 import javax.inject.Inject
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         private val TAG = MainActivity::class.java.simpleName
     }
 
-    lateinit var viewModel: GithubSearchViewModel
+    private lateinit var viewModel: GithubSearchViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -30,11 +30,10 @@ class MainActivity : ComponentActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory)[GithubSearchViewModel::class.java]
 
         setContent {
-            Scaffold(
-                topBar = { TopAppBarWithTitle() },
-                backgroundColor = colorResource(id = R.color.purple_700)
-            ) {
-                /* Add code later */
+            GitHubActionSearchAppBarTheme {
+                Surface(color = Purple700) {
+                    SearchViewActionBar(viewModel)
+                }
             }
         }
     }
