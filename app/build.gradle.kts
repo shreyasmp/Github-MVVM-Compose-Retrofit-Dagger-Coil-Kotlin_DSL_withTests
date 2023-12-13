@@ -21,7 +21,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.9.0"
+        kotlinCompilerExtensionVersion = "1.5.6"
     }
     buildFeatures {
         compose = true
@@ -45,16 +45,12 @@ android {
     dataBinding {
         android.buildFeatures.dataBinding = true
     }
-    flavorDimensions(AppConfig.dimension)
-    productFlavors {
-        create("production") {
-            dimension = AppConfig.dimension
-            versionCode = AppConfig.versionCode
-            versionName = AppConfig.versionName
-        }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
         javaParameters = true
     }
     kapt {
@@ -68,7 +64,7 @@ android {
         warningsAsErrors = true
         abortOnError = true
     }
-    packagingOptions {
+    packaging {
         resources.excludes.add("META-INF/notice.txt")
     }
     testOptions {

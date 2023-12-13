@@ -1,7 +1,7 @@
 object Versions {
 
     const val gradle = "8.2.0"
-    const val kotlin = "1.9.0"
+    const val kotlin = "1.9.21"
     const val kotlinCoroutine = "1.4.0"
     const val coRoutineAdapter = "0.9.2"
     const val navigation = "2.5.0"
@@ -12,10 +12,10 @@ object Versions {
     const val fragmentKTX = "1.4.1"
     const val material = "1.1.0"
 
-    const val composeActivities = "1.5.1"
-    const val composeMaterialDesign = "1.2.1"
-    const val composeAnimations = "1.2.1"
-    const val composeTooling = "1.2.1"
+    const val composeActivities = "1.8.2"
+    const val composeMaterialDesign = "1.5.4"
+    const val composeAnimations = "1.5.4"
+    const val composeTooling = "1.5.4"
     const val composeViewModels = "2.5.1"
     const val composeUITests = "1.2.1"
     const val composeNavigation = "2.5.2"
@@ -27,7 +27,7 @@ object Versions {
     const val recyclerView = "1.1.0"
     const val cardView = "1.0.0"
     const val support = "1.0.0"
-    const val dagger = "2.43.2"
+    const val dagger = "2.49"
     const val okHttp3 = "4.4.0"
     const val picasso = "2.71828"
     const val coil = "2.5.0"

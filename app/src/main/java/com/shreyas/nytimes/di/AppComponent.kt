@@ -16,7 +16,6 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         ServiceModule::class,
         ViewModelFactoryModule::class,
-        PicassoModule::class,
         ViewModule::class,
         ViewModelModule::class
     ]
