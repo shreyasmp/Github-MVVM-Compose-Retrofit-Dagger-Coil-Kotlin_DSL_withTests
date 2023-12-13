@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.Surface
 import androidx.lifecycle.ViewModelProvider
 import com.shreyas.nytimes.ui.SearchViewActionBar
-import com.shreyas.nytimes.ui.theme.GitHubActionSearchAppBarTheme
+import com.shreyas.nytimes.ui.theme.GithubRepositoryTheme
 import com.shreyas.nytimes.ui.theme.Purple700
 import com.shreyas.nytimes.viewmodel.GithubSearchViewModel
 import dagger.android.AndroidInjection
@@ -29,8 +29,11 @@ class MainActivity : ComponentActivity() {
 
         viewModel = ViewModelProvider(this, viewModelFactory)[GithubSearchViewModel::class.java]
 
+        viewModel.fetchMostPopularGitHubRepos("square")
+
+        // Compose Entry, set action bar based search view
         setContent {
-            GitHubActionSearchAppBarTheme {
+            GithubRepositoryTheme {
                 Surface(color = Purple700) {
                     SearchViewActionBar(viewModel)
                 }

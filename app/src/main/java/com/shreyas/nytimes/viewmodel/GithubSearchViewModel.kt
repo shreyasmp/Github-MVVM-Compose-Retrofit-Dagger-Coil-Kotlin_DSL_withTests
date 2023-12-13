@@ -52,7 +52,7 @@ class GithubSearchViewModel @Inject constructor(
                 is ResultWrapper.SUCCESS -> {
                     isLoading.value = false
                     val gitHubData = result.value.value?.items
-                    if (gitHubData != null && gitHubData.isNotEmpty()) {
+                    if (!gitHubData.isNullOrEmpty()) {
                         isError.value = false
                         Log.d(TAG, "Repo List : $gitHubData")
                         _gitHubRepositoryList.value = gitHubData

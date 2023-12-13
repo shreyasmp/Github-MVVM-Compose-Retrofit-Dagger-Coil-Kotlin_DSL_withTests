@@ -1,10 +1,10 @@
 object Versions {
 
-    const val gradle = "7.2.2"
-    const val kotlin = "1.7.10"
+    const val gradle = "8.2.0"
+    const val kotlin = "1.9.0"
     const val kotlinCoroutine = "1.4.0"
     const val coRoutineAdapter = "0.9.2"
-    const val navigation = "2.3.5"
+    const val navigation = "2.5.0"
 
     const val coreKTX = "1.3.2"
     const val appCompat = "1.2.0"
@@ -30,6 +30,7 @@ object Versions {
     const val dagger = "2.43.2"
     const val okHttp3 = "4.4.0"
     const val picasso = "2.71828"
+    const val coil = "2.5.0"
     
     const val androidxTest = "1.4.0"
     const val jUnit = "4.12"
@@ -39,7 +40,7 @@ object Versions {
     const val archCore = "2.1.0"
     const val hamcrest = "2.2"
     const val googleTruth = "1.1.2"
-    const val mockk = "1.10.0"
+    const val mockk = "1.13.8"
 
     const val robolectric = "4.5"
     const val robolectricShadows = "4.5"

@@ -1,13 +1,25 @@
 package com.shreyas.nytimes.ui
 
-import android.widget.Toast
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.AppBarDefaults
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,11 +30,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.shreyas.nytimes.R
 import com.shreyas.nytimes.ui.theme.Purple700
 import com.shreyas.nytimes.utils.SearchState
@@ -61,19 +70,8 @@ fun SearchViewActionBar(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Icon(
-                    imageVector = Icons.Filled.Search,
-                    contentDescription = "Search Repo Image",
-                    tint = Color.Black,
-                    modifier = Modifier.size(150.dp)
-                )
-                Text(
-                    text = "Search Repository",
-                    fontSize = 25.sp,
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
+                // Add Lazy Column here as recyclerView
+
             }
         }
     )
@@ -102,7 +100,7 @@ fun SearchAppBar(
                 .fillMaxWidth(),
             placeholder = {
                 Text(
-                    text = "Search here...",
+                    text = "Type repository name here...",
                     color = Color.White,
                     modifier = Modifier.alpha(ContentAlpha.medium)
                 )
@@ -192,6 +190,7 @@ fun AppBar(
                 onSearchClicked = onSearchTriggered
             )
         }
+
         SearchState.OPENED -> {
             SearchAppBar(
                 text = searchTextState,

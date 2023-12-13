@@ -54,6 +54,11 @@ object AppDependencies {
     const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
     const val daggerAndroidSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
 
+    // Coil Image Loading
+    const val coil = "io.coil-kt:coil:${Versions.coil}"
+    const val coilCompose = "io.coil-kt:coil-compose:${Versions.coil}"
+    const val coilSvg = "io.coil-kt:coil-svg:${Versions.coil}"
+
     // Testing Frameworks
     const val junit = "junit:junit:${Versions.jUnit}"
     const val extJUnit = "androidx.test.ext:junit:${Versions.extJUnit}"

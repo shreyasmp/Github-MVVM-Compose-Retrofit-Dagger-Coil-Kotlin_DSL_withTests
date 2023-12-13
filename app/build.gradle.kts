@@ -2,12 +2,13 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
-    id("androidx.navigation.safeargs.kotlin")
 }
 
+@Suppress("UnstableApiUsage")
 android {
     compileSdkVersion = AppConfig.compileSDK
     buildToolsVersion = AppConfig.buildToolsVersion
+    namespace = "com.shreyas.nytimes"
 
     defaultConfig {
         applicationId = "com.shreyas.nytimes"
@@ -20,7 +21,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.0"
+        kotlinCompilerExtensionVersion = "1.9.0"
     }
     buildFeatures {
         compose = true
@@ -55,8 +56,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
         javaParameters = true
-        freeCompilerArgs =
-            freeCompilerArgs + "-Xjvm-default=enable" + "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi" + "-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi"
     }
     kapt {
         generateStubs = true
@@ -106,14 +105,10 @@ dependencies {
     implementation(AppDependencies.kotlinStdLib)
     implementation(AppDependencies.kotlinCoRoutinesCore)
     implementation(AppDependencies.jakeWhartonCoRoutineAdapter)
-    implementation(AppDependencies.fragmentKTX)
     implementation(AppDependencies.appcompat)
-    implementation(AppDependencies.constraintLayout)
     implementation(AppDependencies.material)
     implementation(AppDependencies.coreKtx)
     implementation(AppDependencies.cardView)
-    implementation(AppDependencies.recyclerView)
-    implementation(AppDependencies.legacySupport)
 
     kapt(AppDependencies.lifeCycleCompiler)
     implementation(AppDependencies.lifeCycleRunTime)
@@ -123,13 +118,11 @@ dependencies {
 
     implementation(AppDependencies.retrofit)
     implementation(AppDependencies.okhttp3Interceptor)
-    implementation(AppDependencies.picasso)
-    implementation(AppDependencies.simpleXml)
     implementation(AppDependencies.gsonConverter)
-
+    implementation(AppDependencies.coil)
+    implementation(AppDependencies.coilCompose)
+    implementation(AppDependencies.coilSvg)
     implementation(AppDependencies.gson)
-    implementation(AppDependencies.navigationKtx)
-    implementation(AppDependencies.navigationUI)
 
     kapt(AppDependencies.daggerProcessor)
     kapt(AppDependencies.daggerCompiler)
