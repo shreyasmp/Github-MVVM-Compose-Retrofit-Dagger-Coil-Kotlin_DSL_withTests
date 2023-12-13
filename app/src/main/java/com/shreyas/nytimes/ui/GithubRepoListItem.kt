@@ -2,9 +2,12 @@ package com.shreyas.nytimes.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,7 +28,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.shreyas.nytimes.R
 import com.shreyas.nytimes.model.OwnerData
@@ -51,16 +56,22 @@ fun GithubRepoListItem(repoData: RepositoryData) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
+                .height(IntrinsicSize.Min)
         ) {
 
-            val avatar = rememberAsyncImagePainter(model = repoData.owner.avatar_url)
-            DrawComposableImage(
-                image = avatar,
-                composeContentDescription = "Github Repository Avatar",
-                width = 80.dp,
-                height = 80.dp,
-                size = 16.dp
-            )
+            Column(
+                modifier = Modifier.fillMaxHeight(),
+                verticalArrangement = Arrangement.Center
+            ) {
+                val avatar: Painter = rememberAsyncImagePainter(model = repoData.owner.avatar_url)
+                DrawComposableImage(
+                    image = avatar,
+                    composeContentDescription = "Github Repository Avatar",
+                    width = 80.dp,
+                    height = 80.dp,
+                    size = 16.dp
+                )
+            }
 
             Spacer(modifier = Modifier.width(16.dp))
 
@@ -73,10 +84,11 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                     end = 12.dp,
                     bottom = 0.dp,
                     weightOfFont = FontWeight.Bold,
-                    styleOfText = MaterialTheme.typography.h2
+                    textSize = 20.sp,
+                    styleOfText = MaterialTheme.typography.h5
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(4.dp))
 
                 DrawComposableText(
                     content = repoData.description,
@@ -84,23 +96,34 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                     top = 0.dp,
                     end = 12.dp,
                     bottom = 0.dp,
-                    weightOfFont = FontWeight.Thin,
-                    styleOfText = MaterialTheme.typography.h4
+                    weightOfFont = FontWeight.Normal,
+                    textSize = 16.sp,
+                    styleOfText = MaterialTheme.typography.h6
                 )
 
+                Spacer(modifier = Modifier.height(4.dp))
+
                 Row(
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                    modifier = Modifier
+                        .align(Alignment.Start)
+                        .height(IntrinsicSize.Min)
                 ) {
 
-                    DrawComposableImage(
-                        image = painterResource(id = R.drawable.ic_star),
-                        composeContentDescription = "Repository Stars Count",
-                        width = 5.dp,
-                        height = 5.dp,
-                        size = 1.dp
-                    )
+                    Column(
+                        modifier = Modifier.fillMaxHeight(),
+                        verticalArrangement = Arrangement.Center
+                    ) {
 
-                    Spacer(modifier = Modifier.height(2.dp))
+                        DrawComposableImage(
+                            image = painterResource(id = R.drawable.ic_star),
+                            composeContentDescription = "Repository Stars Count",
+                            width = 12.dp,
+                            height = 12.dp,
+                            size = 1.dp
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(4.dp))
 
                     DrawComposableText(
                         content = repoData.stargazers_count.toString(),
@@ -108,21 +131,27 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                         top = 0.dp,
                         end = 12.dp,
                         bottom = 0.dp,
-                        weightOfFont = FontWeight.Thin,
-                        styleOfText = MaterialTheme.typography.h4
+                        weightOfFont = FontWeight.Normal,
+                        textSize = 12.sp,
+                        styleOfText = MaterialTheme.typography.h6
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.width(10.dp))
 
-                    DrawComposableImage(
-                        image = painterResource(id = R.drawable.ic_fork),
-                        composeContentDescription = "Repository Forks Count",
-                        width = 5.dp,
-                        height = 5.dp,
-                        size = 1.dp
-                    )
+                    Column(
+                        modifier = Modifier.fillMaxHeight(),
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        DrawComposableImage(
+                            image = painterResource(id = R.drawable.ic_fork),
+                            composeContentDescription = "Repository Forks Count",
+                            width = 12.dp,
+                            height = 12.dp,
+                            size = 1.dp
+                        )
+                    }
 
-                    Spacer(modifier = Modifier.height(2.dp))
+                    Spacer(modifier = Modifier.width(4.dp))
 
                     DrawComposableText(
                         content = repoData.forks_count.toString(),
@@ -130,8 +159,9 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                         top = 0.dp,
                         end = 12.dp,
                         bottom = 0.dp,
-                        weightOfFont = FontWeight.Thin,
-                        styleOfText = MaterialTheme.typography.h4
+                        weightOfFont = FontWeight.Normal,
+                        textSize = 12.sp,
+                        styleOfText = MaterialTheme.typography.h6
                     )
                 }
 
@@ -143,8 +173,9 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                     top = 0.dp,
                     end = 12.dp,
                     bottom = 0.dp,
-                    weightOfFont = FontWeight.Thin,
-                    styleOfText = MaterialTheme.typography.h4
+                    weightOfFont = FontWeight.Normal,
+                    textSize = 12.sp,
+                    styleOfText = MaterialTheme.typography.h6
                 )
             }
         }
@@ -160,7 +191,7 @@ private fun GithubRepositoryLineItemPreview() {
     }
 }
 
-private fun previewRepoData(): RepositoryData = RepositoryData (
+private fun previewRepoData(): RepositoryData = RepositoryData(
     name = "okhttp",
     description = "Square’s meticulous HTTP client for the JVM, Android, and GraalVM.",
     stargazers_count = 44786,
@@ -197,6 +228,7 @@ private fun DrawComposableText(
     end: Dp,
     bottom: Dp,
     weightOfFont: FontWeight?,
+    textSize: TextUnit,
     styleOfText: TextStyle
 ) {
     Text(
@@ -204,6 +236,7 @@ private fun DrawComposableText(
         modifier = Modifier.padding(start, top, end, bottom),
         color = MaterialTheme.colors.surface,
         fontWeight = weightOfFont,
+        fontSize = textSize,
         style = styleOfText
     )
 }
@@ -213,4 +246,4 @@ private fun setFormattedDate(dateTime: String): String {
     return DateTimeFormatter.ofPattern(LAST_UPDATED_DATE_FORMAT).format(dateTimeInstance).toString()
 }
 
-const val LAST_UPDATED_DATE_FORMAT: String = "dd MM, yyyy"
+const val LAST_UPDATED_DATE_FORMAT: String = "dd-MM-yyyy hh:mm:ss"
