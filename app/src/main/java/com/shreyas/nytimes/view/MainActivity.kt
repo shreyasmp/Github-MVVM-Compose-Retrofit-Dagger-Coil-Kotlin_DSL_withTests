@@ -3,20 +3,16 @@ package com.shreyas.nytimes.view
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.lifecycle.ViewModelProvider
 import com.shreyas.nytimes.ui.SearchViewActionBar
 import com.shreyas.nytimes.ui.theme.GithubRepositoryTheme
-import com.shreyas.nytimes.ui.theme.Purple700
 import com.shreyas.nytimes.viewmodel.GithubSearchViewModel
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
-
-    companion object {
-        private val TAG = MainActivity::class.java.simpleName
-    }
 
     private lateinit var viewModel: GithubSearchViewModel
 
@@ -29,12 +25,10 @@ class MainActivity : ComponentActivity() {
 
         viewModel = ViewModelProvider(this, viewModelFactory)[GithubSearchViewModel::class.java]
 
-        viewModel.fetchMostPopularGitHubRepos("square")
-
         // Compose Entry, set action bar based search view
         setContent {
             GithubRepositoryTheme {
-                Surface(color = Purple700) {
+                Surface(color = MaterialTheme.colors.background) {
                     SearchViewActionBar(viewModel)
                 }
             }

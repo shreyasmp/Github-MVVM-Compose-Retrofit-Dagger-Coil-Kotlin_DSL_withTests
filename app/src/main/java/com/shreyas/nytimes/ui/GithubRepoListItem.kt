@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -32,6 +33,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Size
 import com.shreyas.nytimes.R
 import com.shreyas.nytimes.model.OwnerData
 import com.shreyas.nytimes.model.RepositoryData
@@ -63,7 +66,11 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                 modifier = Modifier.fillMaxHeight(),
                 verticalArrangement = Arrangement.Center
             ) {
-                val avatar: Painter = rememberAsyncImagePainter(model = repoData.owner.avatar_url)
+                val avatar: Painter = rememberAsyncImagePainter(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(repoData.owner.avatar_url)
+                        .size(Size.ORIGINAL)
+                        .build())
                 DrawComposableImage(
                     image = avatar,
                     composeContentDescription = "Github Repository Avatar",
@@ -246,4 +253,4 @@ private fun setFormattedDate(dateTime: String): String {
     return DateTimeFormatter.ofPattern(LAST_UPDATED_DATE_FORMAT).format(dateTimeInstance).toString()
 }
 
-const val LAST_UPDATED_DATE_FORMAT: String = "dd-MM-yyyy hh:mm:ss"
+const val LAST_UPDATED_DATE_FORMAT: String = "dd-MMM-yyyy hh:mm:ss"
