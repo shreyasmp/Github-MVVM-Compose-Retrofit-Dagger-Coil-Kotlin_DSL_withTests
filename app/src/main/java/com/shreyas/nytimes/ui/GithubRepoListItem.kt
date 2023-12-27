@@ -60,7 +60,7 @@ fun GithubRepoListItem(repoData: RepositoryData) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .height(160.dp)
+                .height(140.dp)
         ) {
 
             Column(
