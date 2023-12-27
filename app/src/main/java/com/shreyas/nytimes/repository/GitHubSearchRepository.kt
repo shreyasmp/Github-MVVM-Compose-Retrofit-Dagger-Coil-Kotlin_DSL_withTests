@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.shreyas.nytimes.model.GitHubSearchResponse
 import com.shreyas.nytimes.service.GitHubRepoService
 import com.shreyas.nytimes.utils.ResultWrapper
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,12 +23,12 @@ class GitHubSearchRepositoryImpl @Inject constructor(
         private val TAG = GitHubSearchRepositoryImpl::class.java.simpleName
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun getMostPopularGitHubRepos(orgName: String): ResultWrapper<LiveData<GitHubSearchResponse>> {
         val gitHubSearchResults = MutableLiveData<GitHubSearchResponse>()
         return try {
-            val deferredResponse = service.fetchMostPopularRepos(orgName, "stars", 3)
-            val responseBody = deferredResponse.await()
-            if (deferredResponse.isCompleted && responseBody.body() != null) {
+            val responseBody = service.fetchMostPopularRepos(orgName, "stars", 3)
+            if (responseBody.isSuccessful && responseBody.body() != null) {
                 gitHubSearchResults.postValue(responseBody.body())
                 ResultWrapper.SUCCESS(gitHubSearchResults)
             } else {

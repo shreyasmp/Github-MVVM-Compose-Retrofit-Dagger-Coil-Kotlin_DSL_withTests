@@ -9,7 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shreyas.nytimes.model.RepositoryData
+import com.shreyas.nytimes.model.GitHubSearchResponse
 import com.shreyas.nytimes.repository.GitHubSearchRepository
 import com.shreyas.nytimes.utils.ResultWrapper
 import com.shreyas.nytimes.utils.SearchState
@@ -35,12 +35,12 @@ class GithubSearchViewModel @Inject constructor(
     val searchTextState: State<String> = _searchTextState
 
     @VisibleForTesting
-    internal val _gitHubRepositoryList: MutableLiveData<MutableList<RepositoryData>?> =
+    internal val _gitHubSearchResponse: MutableLiveData<GitHubSearchResponse?> =
         MutableLiveData()
-    val gitHubRepositoryList: LiveData<MutableList<RepositoryData>?> = _gitHubRepositoryList
+    val gitHubSearchResponse: LiveData<GitHubSearchResponse?> = _gitHubSearchResponse
 
-    val isError: MutableLiveData<Boolean> = MutableLiveData()
-    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val isError: MutableState<Boolean> = mutableStateOf(false)
+    val isLoading: MutableState<Boolean> = mutableStateOf(false)
 
     fun fetchMostPopularGitHubRepos(repoSearchWord: String) {
         isLoading.value = true
@@ -51,19 +51,16 @@ class GithubSearchViewModel @Inject constructor(
             when (result) {
                 is ResultWrapper.SUCCESS -> {
                     isLoading.value = false
-                    val gitHubData = result.value.value?.items
-                    if (!gitHubData.isNullOrEmpty()) {
-                        isError.value = false
-                        Log.d(TAG, "Repo List : $gitHubData")
-                        _gitHubRepositoryList.value = gitHubData
-                    } else {
-                        isError.value = true
-                    }
+                    val gitHubData = result.value.value
+                    isError.value = false
+                    Log.d(TAG, "Repo List : $gitHubData")
+                    _gitHubSearchResponse.value = gitHubData
                 }
+
                 is ResultWrapper.FAILURE -> {
                     isLoading.value = false
                     isError.value = true
-                    _gitHubRepositoryList.value = null
+                    _gitHubSearchResponse.value = null
                 }
             }
         }

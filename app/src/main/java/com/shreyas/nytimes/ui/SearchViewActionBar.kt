@@ -1,7 +1,10 @@
 package com.shreyas.nytimes.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -10,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.AppBarDefaults
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -36,7 +40,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.shreyas.nytimes.R
 import com.shreyas.nytimes.model.RepositoryData
-import com.shreyas.nytimes.ui.theme.Purple700
 import com.shreyas.nytimes.utils.SearchState
 import com.shreyas.nytimes.viewmodel.GithubSearchViewModel
 
@@ -46,32 +49,47 @@ fun SearchViewActionBar(
 ) {
     val searchState by viewModel.searchState
     val searchTextState by viewModel.searchTextState
-    val repositoryData by viewModel.gitHubRepositoryList.observeAsState()
+    val searchResponseData by viewModel.gitHubSearchResponse.observeAsState()
+    val isLoading by viewModel.isLoading
 
     Scaffold(
         topBar = {
-            AppBar(
+            SearchTopAppBar(
+                viewModel = viewModel,
                 searchState = searchState,
-                searchTextState = searchTextState,
-                onTextChange = {
-                    viewModel.updateSearchTextState(it)
-                },
-                onCloseClicked = {
-                    viewModel.updateSearchState(SearchState.CLOSED)
-                },
-                onSearchClicked = {
-                    viewModel.fetchMostPopularGitHubRepos(it)
-                },
-                onSearchTriggered = {
-                    viewModel.updateSearchState(SearchState.OPENED)
-                }
+                searchTextState = searchTextState
             )
         },
         content = { padding ->
             SearchList(
                 padding,
-                repositoryData
+                searchResponseData?.items,
+                isLoading
             )
+        }
+    )
+}
+
+@Composable
+private fun SearchTopAppBar(
+    viewModel: GithubSearchViewModel,
+    searchState: SearchState,
+    searchTextState: String
+) {
+    AppBar(
+        searchState = searchState,
+        searchTextState = searchTextState,
+        onTextChange = {
+            viewModel.updateSearchTextState(it)
+        },
+        onCloseClicked = {
+            viewModel.updateSearchState(SearchState.CLOSED)
+        },
+        onSearchClicked = {
+            viewModel.fetchMostPopularGitHubRepos(it)
+        },
+        onSearchTriggered = {
+            viewModel.updateSearchState(SearchState.OPENED)
         }
     )
 }
@@ -88,19 +106,18 @@ fun SearchAppBar(
             .fillMaxWidth()
             .height(56.dp),
         elevation = AppBarDefaults.TopAppBarElevation,
-        color = Purple700
+        color = Color.Red
     ) {
         TextField(
             value = text,
             onValueChange = {
                 onTextChange(it)
             },
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxSize(),
             placeholder = {
                 Text(
                     text = "Type repository name here...",
-                    color = Color.White,
+                    color = Color.Black,
                     modifier = Modifier.alpha(ContentAlpha.medium)
                 )
             },
@@ -116,7 +133,7 @@ fun SearchAppBar(
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "SearchImage",
-                        tint = Color.White
+                        tint = Color.Black
                     )
                 }
             },
@@ -133,7 +150,7 @@ fun SearchAppBar(
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Close Image",
-                        tint = Color.White
+                        tint = Color.Black
                     )
                 }
             },
@@ -147,7 +164,7 @@ fun SearchAppBar(
             ),
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Color.Transparent,
-                cursorColor = Color.White.copy(alpha = ContentAlpha.medium)
+                cursorColor = Color.Black.copy(alpha = ContentAlpha.medium)
             )
         )
     }
@@ -161,13 +178,13 @@ fun DefaultAppBar(
         title = {
             Text(text = "Github Repo Search")
         },
-        backgroundColor = colorResource(id = R.color.purple_700),
+        backgroundColor = colorResource(id = R.color.red),
         actions = {
             IconButton(onClick = { onSearchClicked() }) {
                 Icon(
                     Icons.Filled.Search,
                     contentDescription = "Search GitHub Repo",
-                    tint = Color.White
+                    tint = Color.Black
                 )
             }
         }
@@ -204,7 +221,8 @@ fun AppBar(
 @Composable
 fun SearchList(
     padding: PaddingValues,
-    repositoriesData: MutableList<RepositoryData>?
+    repositoriesData: MutableList<RepositoryData>?,
+    isLoading: Boolean
 ) {
     LazyColumn(
         modifier = Modifier.padding(padding),
@@ -217,4 +235,23 @@ fun SearchList(
             }
         }
     }
+    if (isLoading) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Transparent)
+        ) {
+            CircularProgressIndicator()
+        }
+    }
 }
+
+//@Preview(showSystemUi = true)
+//@Preview("Night", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+//@Composable
+//private fun GitSearchViewActionBarPreview() {
+//    GithubRepositoryTheme {
+//        SearchViewActionBar(viewModel =)
+//    }
+//}

@@ -10,8 +10,6 @@ object AppDependencies {
     // General Android frameworks for UI
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val fragmentKTX = "androidx.fragment:fragment-ktx:${Versions.fragmentKTX}"
-    const val constraintLayout =
-        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKTX}"
     const val cardView = "androidx.cardview:cardview:${Versions.cardView}"
