@@ -71,9 +71,9 @@ android {
         unitTests {
             isIncludeAndroidResources = true
             isReturnDefaultValues = true
-        }
-        unitTests.all { test ->
-            test.jvmArgs = listOf("-ea -noverify")
+            all { test ->
+                test.useJUnitPlatform()
+            }
         }
     }
     sourceSets {
@@ -88,10 +88,6 @@ tasks.withType<Test> {
     testLogging {
         events("passed", "skipped", "failed")
     }
-}
-
-tasks.withType<Test>().all {
-    jvmArgs("-ea -noverify")
 }
 
 dependencies {
