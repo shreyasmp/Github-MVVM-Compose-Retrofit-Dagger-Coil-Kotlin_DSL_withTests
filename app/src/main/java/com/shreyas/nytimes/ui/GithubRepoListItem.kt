@@ -94,7 +94,8 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                     bottom = 0.dp,
                     weightOfFont = FontWeight.Bold,
                     textSize = 20.sp,
-                    styleOfText = MaterialTheme.typography.h5
+                    styleOfText = MaterialTheme.typography.h5,
+                    maxLine = 1
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
@@ -107,7 +108,8 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                     bottom = 0.dp,
                     weightOfFont = FontWeight.Normal,
                     textSize = 16.sp,
-                    styleOfText = MaterialTheme.typography.h6
+                    styleOfText = MaterialTheme.typography.h6,
+                    maxLine = 3
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
@@ -142,7 +144,8 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                         bottom = 0.dp,
                         weightOfFont = FontWeight.Normal,
                         textSize = 12.sp,
-                        styleOfText = MaterialTheme.typography.h6
+                        styleOfText = MaterialTheme.typography.h6,
+                        maxLine = 1
                     )
 
                     Spacer(modifier = Modifier.width(10.dp))
@@ -170,7 +173,8 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                         bottom = 0.dp,
                         weightOfFont = FontWeight.Normal,
                         textSize = 12.sp,
-                        styleOfText = MaterialTheme.typography.h6
+                        styleOfText = MaterialTheme.typography.h6,
+                        maxLine = 1
                     )
                 }
 
@@ -184,7 +188,8 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                     bottom = 0.dp,
                     weightOfFont = FontWeight.Normal,
                     textSize = 12.sp,
-                    styleOfText = MaterialTheme.typography.h6
+                    styleOfText = MaterialTheme.typography.h6,
+                    maxLine = 1
                 )
             }
         }
@@ -238,7 +243,8 @@ private fun DrawComposableText(
     bottom: Dp,
     weightOfFont: FontWeight?,
     textSize: TextUnit,
-    styleOfText: TextStyle
+    styleOfText: TextStyle,
+    maxLine: Int
 ) {
     if (content != null) {
         Text(
@@ -247,7 +253,8 @@ private fun DrawComposableText(
             color = MaterialTheme.colors.surface,
             fontWeight = weightOfFont,
             fontSize = textSize,
-            style = styleOfText
+            style = styleOfText,
+            maxLines = maxLine
         )
     }
 }
