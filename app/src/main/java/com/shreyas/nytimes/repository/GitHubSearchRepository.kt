@@ -27,7 +27,7 @@ class GitHubSearchRepositoryImpl @Inject constructor(
     override suspend fun getMostPopularGitHubRepos(orgName: String): ResultWrapper<LiveData<GitHubSearchResponse>> {
         val gitHubSearchResults = MutableLiveData<GitHubSearchResponse>()
         return try {
-            val responseBody = service.fetchMostPopularRepos(orgName, "stars", 3)
+            val responseBody = service.fetchMostPopularRepos(orgName, "stars", 20)
             if (responseBody.isSuccessful && responseBody.body() != null) {
                 gitHubSearchResults.postValue(responseBody.body())
                 ResultWrapper.SUCCESS(gitHubSearchResults)

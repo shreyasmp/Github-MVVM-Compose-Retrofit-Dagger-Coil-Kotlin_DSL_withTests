@@ -71,7 +71,8 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(repoData.owner.avatar_url)
                         .size(Size.ORIGINAL)
-                        .build())
+                        .build()
+                )
                 DrawComposableImage(
                     image = avatar,
                     composeContentDescription = "Github Repository Avatar",
@@ -230,7 +231,7 @@ private fun DrawComposableImage(
 
 @Composable
 private fun DrawComposableText(
-    content: String,
+    content: String?,
     start: Dp,
     top: Dp,
     end: Dp,
@@ -239,14 +240,16 @@ private fun DrawComposableText(
     textSize: TextUnit,
     styleOfText: TextStyle
 ) {
-    Text(
-        text = content,
-        modifier = Modifier.padding(start, top, end, bottom),
-        color = MaterialTheme.colors.surface,
-        fontWeight = weightOfFont,
-        fontSize = textSize,
-        style = styleOfText
-    )
+    if (content != null) {
+        Text(
+            text = content,
+            modifier = Modifier.padding(start, top, end, bottom),
+            color = MaterialTheme.colors.surface,
+            fontWeight = weightOfFont,
+            fontSize = textSize,
+            style = styleOfText
+        )
+    }
 }
 
 private fun setFormattedDate(dateTime: String): String {
