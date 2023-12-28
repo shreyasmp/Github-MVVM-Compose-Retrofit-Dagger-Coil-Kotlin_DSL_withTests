@@ -2,6 +2,7 @@ package com.shreyas.nytimes.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -46,7 +47,10 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 @Composable
-fun GithubRepoListItem(repoData: RepositoryData) {
+fun GithubRepoListItem(
+    repoData: RepositoryData,
+    navigateToGitHubDetailView: (RepositoryData) -> Unit
+) {
 
     Card(
         modifier = Modifier
@@ -62,6 +66,7 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                 .fillMaxWidth()
                 .padding(16.dp)
                 .height(140.dp)
+                .clickable { navigateToGitHubDetailView(repoData) }
         ) {
 
             Column(
@@ -207,7 +212,7 @@ fun GithubRepoListItem(repoData: RepositoryData) {
 @Composable
 private fun GithubRepositoryLineItemPreview() {
     GithubRepositoryTheme {
-        GithubRepoListItem(previewRepoData())
+        GithubRepoListItem(previewRepoData(), navigateToGitHubDetailView = {})
     }
 }
 
@@ -256,7 +261,9 @@ private fun DrawComposableText(
     if (content != null) {
         Text(
             text = content,
-            modifier = Modifier.padding(start, top, end, bottom).testTag(tag),
+            modifier = Modifier
+                .padding(start, top, end, bottom)
+                .testTag(tag),
             color = MaterialTheme.colors.surface,
             fontWeight = weightOfFont,
             fontSize = textSize,

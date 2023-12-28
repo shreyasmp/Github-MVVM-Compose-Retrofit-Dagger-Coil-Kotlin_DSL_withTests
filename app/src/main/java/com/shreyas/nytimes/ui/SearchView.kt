@@ -18,7 +18,6 @@ import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -28,8 +27,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -44,34 +41,7 @@ import com.shreyas.nytimes.utils.SearchState
 import com.shreyas.nytimes.viewmodel.GithubSearchViewModel
 
 @Composable
-fun SearchViewActionBar(
-    viewModel: GithubSearchViewModel
-) {
-    val searchState by viewModel.searchState
-    val searchTextState by viewModel.searchTextState
-    val searchResponseData by viewModel.gitHubSearchResponse.observeAsState()
-    val isLoading by viewModel.isLoading
-
-    Scaffold(
-        topBar = {
-            SearchTopAppBar(
-                viewModel = viewModel,
-                searchState = searchState,
-                searchTextState = searchTextState
-            )
-        },
-        content = { padding ->
-            SearchList(
-                padding,
-                searchResponseData?.items,
-                isLoading
-            )
-        }
-    )
-}
-
-@Composable
-private fun SearchTopAppBar(
+fun SearchTopAppBar(
     viewModel: GithubSearchViewModel,
     searchState: SearchState,
     searchTextState: String
@@ -222,7 +192,8 @@ fun AppBar(
 fun SearchList(
     padding: PaddingValues,
     repositoriesData: MutableList<RepositoryData>?,
-    isLoading: Boolean
+    isLoading: Boolean,
+    navigateToDetailView: (RepositoryData) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.padding(padding),
@@ -231,7 +202,7 @@ fun SearchList(
     ) {
         repositoriesData?.let {
             items(it) { data ->
-                GithubRepoListItem(repoData = data)
+                GithubRepoListItem(repoData = data, navigateToGitHubDetailView = navigateToDetailView)
             }
         }
     }
