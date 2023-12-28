@@ -8,7 +8,6 @@ import retrofit2.http.Query
 /**
  *  Service interface for GitHub Repo
  */
-
 interface GitHubRepoService {
 
     @GET("search/repositories")
