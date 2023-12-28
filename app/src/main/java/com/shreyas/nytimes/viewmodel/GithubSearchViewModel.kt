@@ -1,6 +1,5 @@
 package com.shreyas.nytimes.viewmodel
 
-import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -21,20 +20,17 @@ class GithubSearchViewModel @Inject constructor(
     private val repository: GitHubSearchRepository
 ) : ViewModel() {
 
-    @VisibleForTesting
-    internal val _searchState: MutableState<SearchState> = mutableStateOf(SearchState.CLOSED)
+    private val _searchState: MutableState<SearchState> = mutableStateOf(SearchState.CLOSED)
     val searchState: State<SearchState> = _searchState
 
-    @VisibleForTesting
-    internal val _searchTextState: MutableState<String> = mutableStateOf("")
+    private val _searchTextState: MutableState<String> = mutableStateOf("")
     val searchTextState: State<String> = _searchTextState
 
-    @VisibleForTesting
-    internal val _gitHubSearchResponse: MutableLiveData<GitHubSearchResponse?> =
+    private val _gitHubSearchResponse: MutableLiveData<GitHubSearchResponse?> =
         MutableLiveData()
     val gitHubSearchResponse: LiveData<GitHubSearchResponse?> = _gitHubSearchResponse
 
-    val isError: MutableState<Boolean> = mutableStateOf(false)
+    private val isError: MutableState<Boolean> = mutableStateOf(false)
     val isLoading: MutableState<Boolean> = mutableStateOf(false)
 
     fun fetchMostPopularGitHubRepos(repoSearchWord: String) {

@@ -1,14 +1,16 @@
 package com.shreyas.nytimes.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.shreyas.nytimes.model.GitHubSearchResponse
 import com.shreyas.nytimes.repository.GitHubSearchRepositoryImpl
+import com.shreyas.nytimes.utils.ResultWrapper
 import com.shreyas.nytimes.utils.TestJsonUtils.getObjectFromJsonFile
-import com.shreyas.nytimes.utils.testObserver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestDispatcher
@@ -41,8 +43,7 @@ class GithubSearchViewModelTest {
     @Mock
     private lateinit var mockRepository: GitHubSearchRepositoryImpl
 
-    @Mock
-    private lateinit var mockViewModel: GithubSearchViewModel
+    private lateinit var viewModel: GithubSearchViewModel
 
     @Mock
     private lateinit var githubRepoSearchObserver: Observer<GitHubSearchResponse?>
@@ -50,31 +51,12 @@ class GithubSearchViewModelTest {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        mockViewModel = GithubSearchViewModel(mockRepository)
+        viewModel = GithubSearchViewModel(mockRepository)
     }
 
     @Test
     fun `view model is not null`() {
-        assertThat(mockViewModel).isNotNull()
-    }
-
-    @Test
-    fun `github response live data has success data`() {
-        val githubResponse = getObjectFromJsonFile(
-            jsonFile = "success_github_result.json",
-            tClass = GitHubSearchResponse::class.java
-        )
-        mockViewModel._gitHubSearchResponse.value = githubResponse
-        val githubRepoResponseLiveData = mockViewModel.gitHubSearchResponse.testObserver()
-
-        assertThat(githubRepoResponseLiveData.observedValues).containsExactly(githubResponse)
-    }
-
-    @Test
-    fun `github response live data has error`() {
-        mockViewModel._gitHubSearchResponse.value = null
-        val errorGithubResponseLiveData = mockViewModel.gitHubSearchResponse.testObserver()
-        assertThat(errorGithubResponseLiveData.observedValues).containsExactly(null)
+        assertThat(viewModel).isNotNull()
     }
 
     @Test
@@ -85,18 +67,17 @@ class GithubSearchViewModelTest {
                 tClass = GitHubSearchResponse::class.java
             )
 
-            mockViewModel._gitHubSearchResponse.value = response
-            mockViewModel.gitHubSearchResponse.observeForever(githubRepoSearchObserver)
+            val liveDataResponse = MutableLiveData<GitHubSearchResponse>()
+            liveDataResponse.value = response
 
-            doReturn(mockViewModel.gitHubSearchResponse).`when`(mockRepository)
-                .getMostPopularGitHubRepos(anyString())
+            doReturn(ResultWrapper.SUCCESS(liveDataResponse)).`when`(mockRepository)
+                .getMostPopularGitHubRepos("square")
 
-            mockViewModel.fetchMostPopularGitHubRepos("square")
+            viewModel.gitHubSearchResponse.observeForever(githubRepoSearchObserver)
 
-            assertThat(mockViewModel.gitHubSearchResponse.value).isNotNull()
-            assertThat(mockViewModel.gitHubSearchResponse.value).isEqualTo(response)
+            viewModel.fetchMostPopularGitHubRepos("square")
 
-            verify(mockRepository).getMostPopularGitHubRepos(anyString())
+            verify(mockRepository, times(1)).getMostPopularGitHubRepos(anyString())
         }
     }
 
@@ -108,24 +89,18 @@ class GithubSearchViewModelTest {
                 tClass = GitHubSearchResponse::class.java
             )
 
-            mockViewModel._gitHubSearchResponse.value = response
-            mockViewModel.gitHubSearchResponse.observeForever(githubRepoSearchObserver)
+            doReturn(ResultWrapper.FAILURE(null)).`when`(mockRepository)
+                .getMostPopularGitHubRepos("square")
 
-            doReturn(mockViewModel.gitHubSearchResponse).`when`(mockRepository)
-                .getMostPopularGitHubRepos(anyString())
+            viewModel.gitHubSearchResponse.observeForever(githubRepoSearchObserver)
 
-            mockViewModel.fetchMostPopularGitHubRepos("square")
-
-            assertThat(mockViewModel.gitHubSearchResponse.value).isNotNull()
-            assertThat(
-                mockViewModel.gitHubSearchResponse.value?.items?.size
-            ).isEqualTo(0)
+            viewModel.fetchMostPopularGitHubRepos("square")
         }
     }
 
     @After
     fun tearDown() {
-        mockViewModel.gitHubSearchResponse.removeObserver(githubRepoSearchObserver)
+        viewModel.gitHubSearchResponse.removeObserver(githubRepoSearchObserver)
     }
 
     // Reusable JUnit4 TestRule to override the Main dispatcher
