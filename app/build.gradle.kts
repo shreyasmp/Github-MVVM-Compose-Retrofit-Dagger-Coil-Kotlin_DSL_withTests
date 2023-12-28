@@ -100,6 +100,7 @@ dependencies {
     implementation(AppDependencies.appcompat)
     implementation(AppDependencies.material)
     implementation(AppDependencies.coreKtx)
+    implementation("androidx.compose.ui:ui-test-junit4-android:1.5.4")
 
     kapt(AppDependencies.lifeCycleCompiler)
     implementation(AppDependencies.lifeCycleRunTime)
@@ -165,4 +166,5 @@ dependencies {
 
     debugImplementation(AppDependencies.fragmentTesting)
     debugImplementation(AppDependencies.composeTooling)
+    debugImplementation(AppDependencies.composeUIManifest)
 }
