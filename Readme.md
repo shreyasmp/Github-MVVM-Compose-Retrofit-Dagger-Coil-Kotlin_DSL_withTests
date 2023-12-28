@@ -21,3 +21,11 @@ View Components one for Item List card view and Lazy Column Search List
 
 ![alt text](images/GitHubRepo_List.gif)
 
+![alt text](images/UnitTestRuns.png)
+
+![alt text](images/ComposableTestRun.png)
+
+# Improvements in work
+
+OnClick on card Item opens item in detail view.
+
