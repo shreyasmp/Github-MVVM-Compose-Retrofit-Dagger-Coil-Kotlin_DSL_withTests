@@ -2,22 +2,15 @@ package com.shreyas.nytimes.di
 
 import android.app.Application
 import com.shreyas.nytimes.MainApplication
-import com.shreyas.nytimes.di.modules.*
+import com.shreyas.nytimes.di.modules.GithubRepoModule
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjectionModule
-import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
-        AndroidInjectionModule::class,
-        AndroidSupportInjectionModule::class,
-        ServiceModule::class,
-        ViewModelFactoryModule::class,
-        ViewModule::class,
-        ViewModelModule::class
+        GithubRepoModule::class
     ]
 )
 interface AppComponent {

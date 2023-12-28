@@ -12,8 +12,6 @@ object AppDependencies {
     const val fragmentKTX = "androidx.fragment:fragment-ktx:${Versions.fragmentKTX}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKTX}"
-    const val cardView = "androidx.cardview:cardview:${Versions.cardView}"
-    const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
     const val legacySupport = "androidx.legacy:legacy-support-v4:${Versions.support}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
 

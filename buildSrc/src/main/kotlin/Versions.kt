@@ -23,8 +23,6 @@ object Versions {
     const val archLifeCycleExt = "2.2.0"
     const val gson = "2.8.6"
     const val retrofit = "2.9.0"
-    const val recyclerView = "1.1.0"
-    const val cardView = "1.0.0"
     const val support = "1.0.0"
     const val dagger = "2.49"
     const val okHttp3 = "4.4.0"

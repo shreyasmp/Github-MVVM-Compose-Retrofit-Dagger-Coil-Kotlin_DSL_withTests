@@ -11,6 +11,4 @@ abstract class ViewModule {
     @ActivityScope
     @ContributesAndroidInjector
     abstract fun contributesMainActivity(): MainActivity
-
-    
 }

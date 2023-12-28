@@ -33,15 +33,48 @@ class GitHubSearchRepositoryImplTest : MockServerBaseTest() {
     }
 
     @Test
-    fun `given response is 200 when fetching github response and returns success` () =
+    fun `given response is 200 when fetching github response and returns success`() =
         runTest {
-            mockHttpResponseFromFile("success_github_results.json", HttpURLConnection.HTTP_OK)
+            mockHttpResponseFromFile("success_github_result.json", HttpURLConnection.HTTP_OK)
             when (val result = repositoryImpl.getMostPopularGitHubRepos("square")) {
                 is ResultWrapper.SUCCESS -> {
                     val githubResult = result.value.value
                     assertThat(githubResult, isNotNull())
-                    assertThat(githubResult?.total_count, equalTo(3))
+                    assertThat(githubResult?.total_count, equalTo(2))
+                    assertThat(githubResult?.items?.size, equalTo(2))
                 }
+
+                else -> {}
+            }
+        }
+
+    @Test
+    fun `given response is 200 when fetching github response and returns empty list response`() =
+        runTest {
+            mockHttpResponseFromFile("success_github_empty_result.json", HttpURLConnection.HTTP_OK)
+            when (val result = repositoryImpl.getMostPopularGitHubRepos("square")) {
+                is ResultWrapper.SUCCESS -> {
+                    val githubResult = result.value.value
+                    assertThat(githubResult, isNotNull())
+                    assertThat(githubResult?.total_count, equalTo(0))
+                    assertThat(githubResult?.items?.size, equalTo(0))
+                }
+
+                else -> {}
+            }
+        }
+
+    @Test
+    fun `given response is 403 when fetching github response and returns exception`() =
+        runTest {
+            mockHttpResponse(403)
+            when (val result = repositoryImpl.getMostPopularGitHubRepos("square")) {
+                is ResultWrapper.FAILURE -> {
+                    assertThat(result, isNotNull())
+                    val expectedResponse = ResultWrapper.FAILURE(null)
+                    assertThat(expectedResponse.code, equalTo(result.code))
+                }
+
                 else -> {}
             }
         }

@@ -100,7 +100,6 @@ dependencies {
     implementation(AppDependencies.appcompat)
     implementation(AppDependencies.material)
     implementation(AppDependencies.coreKtx)
-    implementation(AppDependencies.cardView)
 
     kapt(AppDependencies.lifeCycleCompiler)
     implementation(AppDependencies.lifeCycleRunTime)
