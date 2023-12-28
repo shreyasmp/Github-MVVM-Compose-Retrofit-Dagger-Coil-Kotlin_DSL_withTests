@@ -1,6 +1,5 @@
 package com.shreyas.nytimes.viewmodel
 
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -21,10 +20,6 @@ import javax.inject.Inject
 class GithubSearchViewModel @Inject constructor(
     private val repository: GitHubSearchRepository
 ) : ViewModel() {
-
-    companion object {
-        private val TAG = GithubSearchViewModel::class.java.simpleName
-    }
 
     @VisibleForTesting
     internal val _searchState: MutableState<SearchState> = mutableStateOf(SearchState.CLOSED)
@@ -50,19 +45,16 @@ class GithubSearchViewModel @Inject constructor(
             }
             when (result) {
                 is ResultWrapper.SUCCESS -> {
-                    isLoading.value = false
-                    val gitHubData = result.value.value
                     isError.value = false
-                    Log.d(TAG, "Repo List : $gitHubData")
-                    _gitHubSearchResponse.value = gitHubData
+                    _gitHubSearchResponse.value = result.value.value
                 }
 
                 is ResultWrapper.FAILURE -> {
-                    isLoading.value = false
                     isError.value = true
                     _gitHubSearchResponse.value = null
                 }
             }
+            isLoading.value = false
         }
     }
 
