@@ -1,13 +1,11 @@
 package com.shreyas.nytimes.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nhaarman.mockitokotlin2.isNotNull
+import com.google.common.truth.Truth.assertThat
 import com.shreyas.nytimes.base.MockServerBaseTest
 import com.shreyas.nytimes.service.GitHubRepoService
 import com.shreyas.nytimes.utils.ResultWrapper
 import kotlinx.coroutines.test.runTest
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.equalTo
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -39,14 +37,14 @@ class GitHubSearchRepositoryImplTest : MockServerBaseTest() {
             when (val result = repositoryImpl.getMostPopularGitHubRepos("square")) {
                 is ResultWrapper.SUCCESS -> {
                     val githubResult = result.value.value
-                    assertThat(githubResult, isNotNull())
-                    assertThat(githubResult?.total_count, equalTo(2))
-                    assertThat(githubResult?.items?.size, equalTo(2))
+                    assertThat(githubResult).isNotNull()
+                    assertThat(githubResult?.total_count).isEqualTo(2)
+                    assertThat(githubResult?.items?.size).isEqualTo(2)
                 }
 
-            else -> {}
+                else -> {}
+            }
         }
-    }
 
     @Test
     fun `given response is 200 when fetching github response and returns empty list response`() =
@@ -55,9 +53,9 @@ class GitHubSearchRepositoryImplTest : MockServerBaseTest() {
             when (val result = repositoryImpl.getMostPopularGitHubRepos("square")) {
                 is ResultWrapper.SUCCESS -> {
                     val githubResult = result.value.value
-                    assertThat(githubResult, isNotNull())
-                    assertThat(githubResult?.total_count, equalTo(0))
-                    assertThat(githubResult?.items?.size, equalTo(0))
+                    assertThat(githubResult).isNotNull()
+                    assertThat(githubResult?.total_count).isEqualTo(0)
+                    assertThat(githubResult?.items?.size).isEqualTo(0)
                 }
 
                 else -> {}
@@ -70,9 +68,9 @@ class GitHubSearchRepositoryImplTest : MockServerBaseTest() {
             mockHttpResponse(403)
             when (val result = repositoryImpl.getMostPopularGitHubRepos("square")) {
                 is ResultWrapper.FAILURE -> {
-                    assertThat(result, isNotNull())
+                    assertThat(result).isNotNull()
                     val expectedResponse = ResultWrapper.FAILURE(null)
-                    assertThat(expectedResponse.code, equalTo(result.code))
+                    assertThat(expectedResponse.code).isEqualTo(result.code)
                 }
 
                 else -> {}

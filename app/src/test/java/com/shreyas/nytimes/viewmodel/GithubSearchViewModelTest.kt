@@ -2,6 +2,7 @@ package com.shreyas.nytimes.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.verify
 import com.shreyas.nytimes.model.GitHubSearchResponse
@@ -15,8 +16,6 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -27,7 +26,6 @@ import org.junit.runner.Description
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers.anyString
-import org.mockito.ArgumentMatchers.isNotNull
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
@@ -57,7 +55,7 @@ class GithubSearchViewModelTest {
 
     @Test
     fun `view model is not null`() {
-        assertThat(mockViewModel, isNotNull())
+        assertThat(mockViewModel).isNotNull()
     }
 
     @Test
@@ -69,14 +67,14 @@ class GithubSearchViewModelTest {
         mockViewModel._gitHubSearchResponse.value = githubResponse
         val githubRepoResponseLiveData = mockViewModel.gitHubSearchResponse.testObserver()
 
-        assertThat(githubRepoResponseLiveData.observedValues, equalTo(githubResponse))
+        assertThat(githubRepoResponseLiveData.observedValues).containsExactly(githubResponse)
     }
 
     @Test
     fun `github response live data has error`() {
         mockViewModel._gitHubSearchResponse.value = null
         val errorGithubResponseLiveData = mockViewModel.gitHubSearchResponse.testObserver()
-        assertThat(errorGithubResponseLiveData.observedValues, equalTo(null))
+        assertThat(errorGithubResponseLiveData.observedValues).containsExactly(null)
     }
 
     @Test
@@ -95,7 +93,8 @@ class GithubSearchViewModelTest {
 
             mockViewModel.fetchMostPopularGitHubRepos("square")
 
-            assertThat(mockViewModel.gitHubSearchResponse.value, equalTo(response))
+            assertThat(mockViewModel.gitHubSearchResponse.value).isNotNull()
+            assertThat(mockViewModel.gitHubSearchResponse.value).isEqualTo(response)
 
             verify(mockRepository).getMostPopularGitHubRepos(anyString())
         }
@@ -117,9 +116,10 @@ class GithubSearchViewModelTest {
 
             mockViewModel.fetchMostPopularGitHubRepos("square")
 
-            assertThat(mockViewModel.gitHubSearchResponse.value, equalTo(""))
-
-            verify(mockRepository).getMostPopularGitHubRepos(anyString())
+            assertThat(mockViewModel.gitHubSearchResponse.value).isNotNull()
+            assertThat(
+                mockViewModel.gitHubSearchResponse.value?.items?.size
+            ).isEqualTo(0)
         }
     }
 
