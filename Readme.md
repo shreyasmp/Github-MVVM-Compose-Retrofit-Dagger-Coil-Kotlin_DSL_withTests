@@ -19,5 +19,5 @@ I used the Android TopBar Search for finding the repository with help of
 its state flows and after retrieving the data, show to UI using Composable 
 View Components one for Item List card view and Lazy Column Search List
 
-[GitHubRepo_List.mp4](images%2FGitHubRepo_List.mp4)
+[Github Repo List Video](images/GitHubRepo_List.mp4)
 
