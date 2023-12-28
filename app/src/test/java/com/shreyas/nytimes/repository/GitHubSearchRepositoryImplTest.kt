@@ -44,9 +44,9 @@ class GitHubSearchRepositoryImplTest : MockServerBaseTest() {
                     assertThat(githubResult?.items?.size, equalTo(2))
                 }
 
-                else -> {}
-            }
+            else -> {}
         }
+    }
 
     @Test
     fun `given response is 200 when fetching github response and returns empty list response`() =

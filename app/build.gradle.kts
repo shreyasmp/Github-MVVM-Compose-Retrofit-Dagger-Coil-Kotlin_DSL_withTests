@@ -71,9 +71,6 @@ android {
         unitTests {
             isIncludeAndroidResources = true
             isReturnDefaultValues = true
-            all { test ->
-                test.useJUnitPlatform()
-            }
         }
     }
     sourceSets {
@@ -84,7 +81,6 @@ android {
 }
 
 tasks.withType<Test> {
-    useJUnitPlatform()
     testLogging {
         events("passed", "skipped", "failed")
     }

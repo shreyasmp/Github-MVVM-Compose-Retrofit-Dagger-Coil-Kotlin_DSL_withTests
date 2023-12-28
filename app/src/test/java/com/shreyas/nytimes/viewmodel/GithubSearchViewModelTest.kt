@@ -8,7 +8,13 @@ import com.shreyas.nytimes.model.GitHubSearchResponse
 import com.shreyas.nytimes.repository.GitHubSearchRepositoryImpl
 import com.shreyas.nytimes.utils.TestJsonUtils.getObjectFromJsonFile
 import com.shreyas.nytimes.utils.testObserver
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.junit.After
@@ -16,18 +22,23 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
 import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.ArgumentMatchers.isNotNull
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(JUnit4::class)
 class GithubSearchViewModelTest {
 
     @get:Rule
     val instantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
     @Mock
     private lateinit var mockRepository: GitHubSearchRepositoryImpl
@@ -115,5 +126,19 @@ class GithubSearchViewModelTest {
     @After
     fun tearDown() {
         mockViewModel.gitHubSearchResponse.removeObserver(githubRepoSearchObserver)
+    }
+
+    // Reusable JUnit4 TestRule to override the Main dispatcher
+    @OptIn(ExperimentalCoroutinesApi::class)
+    class MainDispatcherRule(
+        private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()
+    ) : TestWatcher() {
+        override fun starting(description: Description) {
+            Dispatchers.setMain(testDispatcher)
+        }
+
+        override fun finished(description: Description) {
+            Dispatchers.resetMain()
+        }
     }
 }
