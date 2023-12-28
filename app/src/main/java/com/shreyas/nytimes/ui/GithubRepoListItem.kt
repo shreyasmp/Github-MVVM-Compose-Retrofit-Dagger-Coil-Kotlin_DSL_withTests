@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -95,7 +96,8 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                     weightOfFont = FontWeight.Bold,
                     textSize = 20.sp,
                     styleOfText = MaterialTheme.typography.h5,
-                    maxLine = 1
+                    maxLine = 1,
+                    tag = "repoName"
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
@@ -109,7 +111,8 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                     weightOfFont = FontWeight.Normal,
                     textSize = 16.sp,
                     styleOfText = MaterialTheme.typography.h6,
-                    maxLine = 3
+                    maxLine = 3,
+                    tag = "repoDesc"
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
@@ -145,7 +148,8 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                         weightOfFont = FontWeight.Normal,
                         textSize = 12.sp,
                         styleOfText = MaterialTheme.typography.h6,
-                        maxLine = 1
+                        maxLine = 1,
+                        tag = "repoStarGazerCount"
                     )
 
                     Spacer(modifier = Modifier.width(10.dp))
@@ -174,7 +178,8 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                         weightOfFont = FontWeight.Normal,
                         textSize = 12.sp,
                         styleOfText = MaterialTheme.typography.h6,
-                        maxLine = 1
+                        maxLine = 1,
+                        tag = "repoForksCount"
                     )
                 }
 
@@ -189,7 +194,8 @@ fun GithubRepoListItem(repoData: RepositoryData) {
                     weightOfFont = FontWeight.Normal,
                     textSize = 12.sp,
                     styleOfText = MaterialTheme.typography.h6,
-                    maxLine = 1
+                    maxLine = 1,
+                    tag = "repoLastUpdatedDate"
                 )
             }
         }
@@ -244,12 +250,13 @@ private fun DrawComposableText(
     weightOfFont: FontWeight?,
     textSize: TextUnit,
     styleOfText: TextStyle,
-    maxLine: Int
+    maxLine: Int,
+    tag: String
 ) {
     if (content != null) {
         Text(
             text = content,
-            modifier = Modifier.padding(start, top, end, bottom),
+            modifier = Modifier.padding(start, top, end, bottom).testTag(tag),
             color = MaterialTheme.colors.surface,
             fontWeight = weightOfFont,
             fontSize = textSize,

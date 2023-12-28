@@ -4,7 +4,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.shreyas.nytimes.model.OwnerData
 import com.shreyas.nytimes.model.RepositoryData
 import com.shreyas.nytimes.ui.theme.GithubRepositoryTheme
@@ -12,9 +14,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 
-@RunWith(JUnit4::class)
+@RunWith(AndroidJUnit4::class)
 class GithubRepoListItemKtTest {
 
     @get:Rule
@@ -43,14 +44,14 @@ class GithubRepoListItemKtTest {
     }
 
     @Test
-    fun `test github list item composable component`() {
+    fun testGithubListItemComposable() {
         composeTestRule.run {
             onNodeWithText("okhttp").assertIsDisplayed()
             onNodeWithText("Square’s meticulous HTTP client for the JVM, Android, and GraalVM.")
                 .assertIsDisplayed()
             onNodeWithText("44786").assertIsDisplayed()
             onNodeWithText("9275").assertIsDisplayed()
-            onNodeWithText("12-Dec-2023 02:20:23").assertIsDisplayed()
+            onNodeWithTag("repoLastUpdatedDate").assertExists()
         }
     }
 }

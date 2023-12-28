@@ -65,7 +65,7 @@ android {
         abortOnError = true
     }
     packaging {
-        resources.excludes.add("META-INF/notice.txt")
+        resources.excludes.add("META-INF/*")
     }
     testOptions {
         unitTests {
