@@ -11,12 +11,13 @@
 7. Jetpack Compose for Card Item and LazyColum which is recyclerView in Compose World.
 8. Coil Image API for image loading/caching
 9. Mockito/Espresso/extJunit/Robolectric for unit testing and android tests for viewmodel, views
-10. OKHttp Interceptor/Mockserver for logging service responses on Logcat and creating mock server for testing Repository
+10. OKHttp Interceptor/Mockserver for logging service responses on Logcat and creating mock server
+    for testing Repository
 
-Here's the video of how the app works and looks like. 
+Here's the video of how the app works and looks like.
 
-I used the Android TopBar Search for finding the repository with help of 
-its state flows and after retrieving the data, show to UI using Composable 
+I used the Android TopBar Search for finding the repository with help of
+its state flows and after retrieving the data, show to UI using Composable
 View Components one for Item List card view and Lazy Column Search List
 
 ![alt text](images/GitHubRepo_List.gif)
@@ -25,7 +26,4 @@ View Components one for Item List card view and Lazy Column Search List
 
 ![alt text](images/ComposableTestRun.png)
 
-# Improvements in work
-
-OnClick on card Item opens item in detail view.
 
