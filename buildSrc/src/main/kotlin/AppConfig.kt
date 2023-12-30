@@ -1,7 +1,7 @@
 object AppConfig {
 
     const val compileSDK = "android-34"
-    const val minSDK = 27
+    const val minSDK = 33
     const val targetSDK = 34
     const val versionCode = 1
     const val versionName = "1.0.0"

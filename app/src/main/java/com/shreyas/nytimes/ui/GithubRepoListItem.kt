@@ -38,9 +38,9 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.shreyas.nytimes.R
-import com.shreyas.nytimes.model.OwnerData
 import com.shreyas.nytimes.model.RepositoryData
 import com.shreyas.nytimes.ui.theme.GithubRepositoryTheme
+import com.shreyas.nytimes.utils.GithubRepositoryDataProvider
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -212,19 +212,11 @@ fun GithubRepoListItem(
 @Composable
 private fun GithubRepositoryLineItemPreview() {
     GithubRepositoryTheme {
-        GithubRepoListItem(previewRepoData(), navigateToGitHubDetailView = {})
+        GithubRepoListItem(
+            GithubRepositoryDataProvider.repositoryData,
+            navigateToGitHubDetailView = {})
     }
 }
-
-private fun previewRepoData(): RepositoryData = RepositoryData(
-    name = "okhttp",
-    description = "Square’s meticulous HTTP client for the JVM, Android, and GraalVM.",
-    stargazers_count = 44786,
-    forks_count = 9275,
-    updated_at = "2023-12-12T02:20:23Z",
-    html_url = "https://github.com/square/okhttp",
-    owner = OwnerData(avatar_url = "https://avatars.githubusercontent.com/u/82592?v=4")
-)
 
 @Composable
 private fun DrawComposableImage(

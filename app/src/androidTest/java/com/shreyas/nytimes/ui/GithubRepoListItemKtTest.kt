@@ -37,7 +37,7 @@ class GithubRepoListItemKtTest {
         composeTestRule.setContent {
             GithubRepositoryTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    GithubRepoListItem(repoData = mockRepoData)
+                    GithubRepoListItem(repoData = mockRepoData, navigateToGitHubDetailView = {})
                 }
             }
         }
@@ -51,7 +51,7 @@ class GithubRepoListItemKtTest {
                 .assertIsDisplayed()
             onNodeWithText("44786").assertIsDisplayed()
             onNodeWithText("9275").assertIsDisplayed()
-            onNodeWithTag("repoLastUpdatedDate").assertExists()
+            onNodeWithTag("repoLastUpdatedDate", useUnmergedTree = true).assertExists()
         }
     }
 }
