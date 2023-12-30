@@ -18,7 +18,8 @@ Here's the video of how the app works and looks like.
 
 I used the Android TopBar Search for finding the repository with help of
 its state flows and after retrieving the data, show to UI using Composable
-View Components one for Item List card view and Lazy Column Search List
+View Components one for Item List card view which is used in Lazy Column Search List and another for
+Detailed View.
 
 ![alt text](images/GitHubRepo_List.gif)
 
