@@ -1,4 +1,4 @@
-# NYTimes-MVVM-Compose-Retrofit-Dagger-Coil-Kotlin_DSL_withTests
+# Github-MVVM-Compose-Retrofit-Dagger-Coil-Kotlin_DSL_withTests
 
 # This is a MVVM Android App developed using some of latest Android libraries as of 2023/24
 
