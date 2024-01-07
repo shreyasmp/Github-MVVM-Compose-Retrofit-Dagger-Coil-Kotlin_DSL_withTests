@@ -1,3 +1,2 @@
-include (":app")
-include(":buildsrc")
-rootProject.name = "NYTimes"
+include(":app")
+rootProject.name = "Github"
