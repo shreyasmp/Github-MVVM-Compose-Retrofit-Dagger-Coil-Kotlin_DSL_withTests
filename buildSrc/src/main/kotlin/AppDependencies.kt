@@ -33,6 +33,7 @@ object AppDependencies {
     const val composeToolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.composeTooling}"
     const val composeViewModels = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeViewModels}"
     const val composeUITests = "androidx.compose.ui:ui-test-junit4:${Versions.composeUITests}"
+    const val composeUiAndroidTests = "androidx.compose.ui:ui-test-junit4-android:${Versions.composeTooling}"
     const val composeUIManifest = "androidx.compose.ui:ui-test-manifest:${Versions.composeUITests}"
     const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
     const val composeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.composeMaterialDesign}"
